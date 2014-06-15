@@ -5,10 +5,11 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -16,6 +17,8 @@ public class MainActivity extends ActionBarActivity {
     public TextView tip;
     public TextView total;
     int buttonId;
+    //int tipPercent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +27,7 @@ public class MainActivity extends ActionBarActivity {
 
         tip = (TextView) findViewById(R.id.tipText);
         total = (TextView) findViewById(R.id.tipAmttxt);
+        customTipListener();
     }
 
 
@@ -34,26 +38,26 @@ public class MainActivity extends ActionBarActivity {
         return true;
     }
     public void calculateTip(int buttonSelected){
-        addTextChangeListener();
+        if(buttonSelected!=R.id.tipPercentTxt)
+            addTextChangeListener();
         String tipAmountStr = actualAmt.getText().toString();
         double tipAmount = Double.parseDouble(tipAmountStr);
         double tipValue=0;
         tip = (TextView) findViewById(R.id.tipTxt);
         total = (TextView) findViewById(R.id.TotalTxt);
-        switch(buttonSelected){
-            case R.id.tip1 :
-                tipValue = tipAmount * 0.1;
-                tipAmount += tipValue;
-                break;
-            case R.id.tip2 :
-                tipValue = tipAmount * 0.15;
-                tipAmount += tipValue;
-                break;
-            case R.id.tip3 :
-                tipValue = tipAmount * 0.20;
-                tipAmount += tipValue;
-                break;
+        EditText percentText = null;
+        if(buttonSelected==R.id.tipPercentTxt) {
+            percentText = (EditText) findViewById(R.id.tipPercentTxt);
+            double percent = Double.parseDouble(percentText.getText().toString());
+            tipValue = tipAmount * percent / 100;
+        }else {
+            Button b = (Button) findViewById(buttonSelected);
+            String percentStr = b.getText().toString();
+            double percent = Double.parseDouble(percentStr.substring(0, percentStr.length() - 1));
+            tipValue = tipAmount * percent / 100;
         }
+
+        tipAmount += tipValue;
         tip.setText("Tip is: "+ Double.toString(tipValue));
         total.setText("Total is: " + Double.toString(tipAmount));
 
@@ -86,6 +90,55 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
+
+    private void customTipListener() {
+        final EditText percent = (EditText) findViewById(R.id.tipPercentTxt);
+        percent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                if(!percent.getText().toString().equals(""))
+                    customSelected(findViewById(R.id.tipPercentTxt));
+                else{
+                    ToggleButton t = (ToggleButton) findViewById(R.id.toggleButton);
+                    t.setChecked(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+
+            }
+        });
+    }
+    public void customSelected(View v){
+        ToggleButton t = (ToggleButton) findViewById(R.id.toggleButton);
+
+        if(t.isChecked()) {
+            Button tipBtn = (Button) findViewById(R.id.tip1);
+            tipBtn.setClickable(false);
+            tipBtn = (Button) findViewById(R.id.tip2);
+            tipBtn.setClickable(false);
+            tipBtn = (Button) findViewById(R.id.tip3);
+            tipBtn.setClickable(false);
+
+            calculateTip(R.id.tipPercentTxt);
+        }else{
+            Button tipBtn = (Button) findViewById(R.id.tip1);
+            tipBtn.setClickable(true);
+            tipBtn = (Button) findViewById(R.id.tip2);
+            tipBtn.setClickable(true);
+            tipBtn = (Button) findViewById(R.id.tip3);
+            tipBtn.setClickable(true);
+            TextView tipPerText = (TextView) findViewById(R.id.tipPercentTxt);
+            tipPerText.setText("");
+        }
+    }
 
     public void buttonPressed(View buttonSelected){
         buttonId = buttonSelected.getId();

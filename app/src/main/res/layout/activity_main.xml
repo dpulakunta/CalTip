@@ -68,4 +68,34 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Custom Tip"
+        android:id="@+id/toggleButton"
+        android:checked="false"
+        android:layout_below="@+id/tip2"
+        android:layout_toRightOf="@+id/tip2"
+        android:layout_alignRight="@+id/tip3"
+        android:layout_alignEnd="@+id/tip3"
+        android:onClick="customSelected" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tipPercentTxt"
+        android:hint="Custom"
+        android:layout_alignBottom="@+id/toggleButton"
+        android:layout_alignRight="@+id/tip2"
+        android:layout_alignEnd="@+id/tip2"
+        android:layout_alignLeft="@+id/tip1"
+        android:layout_alignStart="@+id/tip1" />
+
 </RelativeLayout>
