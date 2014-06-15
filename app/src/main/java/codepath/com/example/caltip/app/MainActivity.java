@@ -27,7 +27,7 @@ public class MainActivity extends ActionBarActivity {
 
         tip = (TextView) findViewById(R.id.tipText);
         total = (TextView) findViewById(R.id.tipAmttxt);
-        customTipListener();
+        //customTipListener();
     }
 
 
@@ -90,7 +90,7 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
-
+/*
     private void customTipListener() {
         final EditText percent = (EditText) findViewById(R.id.tipPercentTxt);
         percent.addTextChangedListener(new TextWatcher() {
@@ -116,6 +116,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
     }
+ */
     public void customSelected(View v){
         ToggleButton t = (ToggleButton) findViewById(R.id.toggleButton);
 
