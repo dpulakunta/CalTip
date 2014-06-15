@@ -12,10 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tipText"
+        android:layout_marginTop="49dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="130dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -25,9 +25,10 @@
         android:layout_height="wrap_content"
         android:text="10%"
         android:id="@+id/tip1"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/tip2"
-        android:onClick="buttonPressed"/>
+        android:onClick="buttonPressed"
+        android:layout_marginTop="46dp"
+        android:layout_below="@+id/tipText"
+        android:layout_toLeftOf="@+id/tip2" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -55,18 +56,19 @@
         android:layout_height="wrap_content"
         android:id="@+id/TotalTxt"
         android:text="Total is:"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/tipPercentTxt"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="100dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tipTxt"
         android:text="Tip is:"
-        android:layout_above="@+id/TotalTxt"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/TotalTxt"
+        android:layout_alignParentLeft="true" />
 
     <ToggleButton
         android:layout_width="wrap_content"

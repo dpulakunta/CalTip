@@ -6,8 +6,10 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -28,6 +30,8 @@ public class MainActivity extends ActionBarActivity {
         tip = (TextView) findViewById(R.id.tipText);
         total = (TextView) findViewById(R.id.tipAmttxt);
         //customTipListener();
+
+
     }
 
 
@@ -92,8 +96,8 @@ public class MainActivity extends ActionBarActivity {
 
 /*
     private void customTipListener() {
-        final EditText percent = (EditText) findViewById(R.id.tipPercentTxt);
-        percent.addTextChangedListener(new TextWatcher() {
+        final EditText splitTxt = (EditText) findViewById(R.id.splitByTxt);
+        splitTxt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
 
@@ -101,11 +105,10 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                if(!percent.getText().toString().equals(""))
-                    customSelected(findViewById(R.id.tipPercentTxt));
+                if(!splitTxt.getText().toString().equals(""))
+
                 else{
-                    ToggleButton t = (ToggleButton) findViewById(R.id.toggleButton);
-                    t.setChecked(false);
+
                 }
             }
 
@@ -116,7 +119,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
     }
- */
+*/
     public void customSelected(View v){
         ToggleButton t = (ToggleButton) findViewById(R.id.toggleButton);
 
