@@ -27,7 +27,7 @@
         android:id="@+id/tip1"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/tip2"
-        android:onClick="calculateTip"/>
+        android:onClick="buttonPressed"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -38,7 +38,7 @@
         android:layout_alignTop="@+id/tip1"
         android:layout_centerHorizontal="true"
         android:layout_alignBottom="@+id/tip1"
-        android:onClick="calculateTip"/>
+        android:onClick="buttonPressed"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -48,7 +48,7 @@
         android:id="@+id/tip3"
         android:layout_alignTop="@+id/tip2"
         android:layout_toRightOf="@+id/tip2"
-        android:onClick="calculateTip"/>
+        android:onClick="buttonPressed"/>
 
     <EditText
         android:layout_width="wrap_content"

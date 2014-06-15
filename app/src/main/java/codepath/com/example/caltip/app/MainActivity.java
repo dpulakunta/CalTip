@@ -2,6 +2,8 @@ package codepath.com.example.caltip.app;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,11 +15,13 @@ public class MainActivity extends ActionBarActivity {
     public EditText actualAmt;
     public TextView tip;
     public TextView total;
+    int buttonId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         actualAmt = (EditText) findViewById(R.id.tipText);
+
         tip = (TextView) findViewById(R.id.tipText);
         total = (TextView) findViewById(R.id.tipAmttxt);
     }
@@ -29,14 +33,14 @@ public class MainActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-    public void calculateTip(View buttonSelected){
-        int buttonId = buttonSelected.getId();
+    public void calculateTip(int buttonSelected){
+        addTextChangeListener();
         String tipAmountStr = actualAmt.getText().toString();
         double tipAmount = Double.parseDouble(tipAmountStr);
         double tipValue=0;
         tip = (TextView) findViewById(R.id.tipTxt);
         total = (TextView) findViewById(R.id.TotalTxt);
-        switch(buttonId){
+        switch(buttonSelected){
             case R.id.tip1 :
                 tipValue = tipAmount * 0.1;
                 tipAmount += tipValue;
@@ -50,19 +54,42 @@ public class MainActivity extends ActionBarActivity {
                 tipAmount += tipValue;
                 break;
         }
-        tip.setText(tip.getText().toString() + Double.toString(tipValue));
-        total.setText(total.getText().toString() + Double.toString(tipAmount));
+        tip.setText("Tip is: "+ Double.toString(tipValue));
+        total.setText("Total is: " + Double.toString(tipAmount));
 
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+
+    private void addTextChangeListener() {
+        actualAmt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                if(!actualAmt.getText().toString().equals(""))
+                    calculateTip(buttonId);
+                else{
+                    tip.setText("Tip is: 0");
+                    total.setText("Total is: 0");
+                }
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                //calculateTip(buttonId);
+
+            }
+        });
     }
+
+
+    public void buttonPressed(View buttonSelected){
+        buttonId = buttonSelected.getId();
+        calculateTip(buttonId);
+    }
+
 }
